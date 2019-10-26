@@ -1,0 +1,20 @@
+body, html {
+    height: 100%;
+    margin: 0;
+
+  }
+
+h1 {
+    text-align: center;
+}
+
+  .bgimg-1 {
+    position: relative;
+    opacity: 0.65;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* https://stock.adobe.com/search?load_type=search&native_visual_search=&similar_content_id=&is_recent_search=&search_type=usertyped&k=sunset&asset_id=265728175 */
+    background-image: url("./clouds.jpg");
+    height: 100%;
+  }
