@@ -40,6 +40,15 @@ else {
 };
 
 
+// Put search history on page
+cityHistory.forEach(function (city) {
+    var cityListEl = $("<li>");
+    cityListEl.addClass("list-group-item list-group-item-mine");
+    cityListEl.text(city);
+    cityListEl.css("border", "1px solid");
+    $(".list-group").prepend(cityListEl);
+
+});
 
 // **** This uses zip code.  Will need to be changed.
 //  queryWeather = `https://api.openweathermap.org/data/2.5/weather?q=${currCity}&units=imperial&APPID=${appid}`;
@@ -57,7 +66,7 @@ $.ajax({
     currWind = response.wind.speed;
     currLongitude = response.coord.lon;
     currLatitude = response.coord.lat;
-    currIconURL = `https://openweathermap.org/img/w/${response.weather[0].icon}.png`
+    currIconURL = `https://openweathermap.org/img/w/${response.weather[0].icon}.png`;
 
     // query for uv
     queryUV = `https://api.openweathermap.org/data/2.5/uvi?lat=${currLatitude}&lon=${currLongitude}&APPID=${appid}`;

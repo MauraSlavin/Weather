@@ -22,3 +22,8 @@ h1 {
   height: 30px;
   font-size: 25px;
 }
+
+.list-group {
+  list-style-type: none;
+  width: 25%;
+}
