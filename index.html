@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./Assets/style.css">
     <title>Document</title>
 </head>
@@ -13,10 +14,10 @@
 
 
     <!-- page header -->
-    <h1>Weather Dashboard</h1>
+    <h1 class = "text-center">Weather Dashboard</h1>
 
 
-    <div class="jumbotron">
+    <div class="jumbotron jumbotron-fluid bg-transparent">
 
         <!-- everything but the header in one row -->
         <div class="row">
@@ -24,10 +25,10 @@
             <!-- First column has search & history list of cities -->
             <div class="col-3" id="searchPrompt">
                 <!-- prompt to input city -->
-                <label for="inputCity"><strong>Search city: </strong></label>
+                <label for="inputCity" id="inputCityPrompt"><strong>Search city: </strong></label>
                 <input type="text" class="form-contro searchInput" name="inputCity" id="inputCity">
 
-                <ul class="list-group">
+                <ul class="list-group" id="cityList">
                     <!-- previously searched cities will be added by js here -->
                 </ul>
             </div>
@@ -53,11 +54,11 @@
  <!-- <script src="jquery-3.4.1.min.js"></script>
  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
     <script src="./Develop/weather.js"></script>
 </body>
 

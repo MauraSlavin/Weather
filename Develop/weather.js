@@ -43,9 +43,9 @@ else {
 // Put search history on page
 cityHistory.forEach(function (city) {
     var cityListEl = $("<li>");
-    cityListEl.addClass("list-group-item list-group-item-mine");
+    cityListEl.addClass("list-option list-group-item");
     cityListEl.text(city);
-    cityListEl.css("border", "1px solid");
+ //   cityListEl.css("border", "1px solid");
     $(".list-group").prepend(cityListEl);
 
 });
