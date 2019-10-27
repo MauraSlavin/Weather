@@ -14,7 +14,7 @@
 
 
     <!-- page header -->
-    <h1 class = "text-center">Weather Dashboard</h1>
+    <h1 class="text-center">Weather Dashboard</h1>
 
 
     <div class="jumbotron jumbotron-fluid bg-transparent">
@@ -25,7 +25,7 @@
             <!-- First column has search & history list of cities -->
             <div class="col-3" id="searchPrompt">
                 <!-- prompt to input city -->
-                <label for="inputCity" id="inputCityPrompt"><strong>Search city: </strong></label>
+                <label for="inputCity" id="inputCityPrompt">Search city: </label>
                 <input type="text" class="form-contro searchInput" name="inputCity" id="inputCity">
 
                 <ul class="list-group" id="cityList">
@@ -34,13 +34,36 @@
             </div>
 
             <!--  Selected city current forecast, then 5 day forecast -->
-            <div class="col-9">
+            <div class="col-9" id="currWeather">
                 <!-- box for current weather conditions. -->
-                <div class="container">
-                    <p id="currCityLine">
-                        <!-- Javascript will fill in data based on what's in localStorage -->
-                    </p>
+
+                <!-- first row w/city, date & icon -->
+                <div class="row" id="currWeatherRow">
+                    <div class="col-4" id="cityName"></div>
+                    <div class="col-4" id="todayDate"></div>
+                    <div class="col-4" id="weatherIcon"></div>
                 </div>
+
+                <!-- Temperature -->
+                <div class="row">
+                    <div class="col-12 ml-3" id="cityTemp">Temperature:</div>
+                </div>
+
+                <!-- Humidity -->
+                <div class="row">
+                    <div class="col-12 ml-3" id="cityHumid">Humidity:</div>
+                </div>
+
+                <!-- Wind Speed -->
+                <div class="row">
+                    <div class="col-12 ml-3" id="cityWind">Wind Speed:</div>
+                </div>
+
+                <!-- UV Index -->
+                <div class="row">
+                    <div class="col-12 ml-3" id="cityUV">UV Index:</div>
+                </div>
+
             </div>
         </div>
 
@@ -49,14 +72,20 @@
 
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    
- <!-- <script src="jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <!-- <script src="jquery-3.4.1.min.js"></script>
  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script src="./Develop/weather.js"></script>

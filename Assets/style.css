@@ -1,66 +1,42 @@
-/*  body, html {
-  height: 100%;
-  margin: 0;
+html, body, .container-fluid {
+  height: 100%;                      /* fill screen with background */
 }
-
-*/
 
 body {
-  margin: 20px;
+  margin: 20px;  /* space around page, not up against edge of window */
+  font-weight: bolder !important;
+  font-size: 16px !important;
 }
 
-/*
-h1 {
-  text-align: center;
-}
-*/
-
+/* background image for the page */
 .bgimg-1 {
   position: relative;
-/*  opacity: 0.65; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  /* https://stock.adobe.com/search?load_type=search&native_visual_search=&similar_content_id=&is_recent_search=&search_type=usertyped&k=sunset&asset_id=265728175 */
+  /* Image from https://stock.adobe.com/search?load_type=search&native_visual_search=&similar_content_id=&is_recent_search=&search_type=usertyped&k=sunset&asset_id=265728175 */
   background-image: url("./clouds.jpg");
   height: 100%;
 }
 
-/*
-#searchPrompt, 
-
-  height: 30px;
-  font-size: 25px;
-*/
-
 #cityList {
-  margin-top: 10px;
+  margin-top: 10px;   /* space between city search & list of previously searched cities */
 }
 
 #inputCity {
-  width: 100%;
-  border-radius: 4px;
+  width: 100%;         /* so search window lines up with list of cities */
+  border-radius: 4px;  /* input for city search match style of list of previously searched cities */
+  background-color: rgb(245, 217, 242);   /* easier to read without background behind text */
 }
 
-/*
-#inputCityPrompt {
-  padding-left: 40px;
+.list-group-item {
+  background-color: rgb(245, 217, 242);   /* easier to read without background behind text */
 }
 
-.list-group {
-  list-style-type: none;
-  width: 25%;
+#currWeather {
+  background-color: rgb(245, 217, 242);   /* easier to read without background behind text */
 }
 
-
-/* .list-group-item {  
-  height: 35px;     
- }                   
-
-.list-option {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 35px;
+#currWeatherRow, #cityTemp, #cityHumid, #cityWind, #cityUV {
+  height: 40px;
 }
-*/
