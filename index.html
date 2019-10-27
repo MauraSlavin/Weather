@@ -25,7 +25,12 @@
 
             <!--  Selected city current forecast, then 5 day forecast -->
             <div class="col-9">
-
+                <!-- box for current weather conditions. -->
+                <div class="container">
+                    <p id="currCityLine">
+                        <!-- Javascript will fill in data based on what's in localStorage -->
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -35,9 +40,10 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <!--   <script src="javascript.js"></script>   -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./Develop/weather.js"></script>
 </body>
 
 </html>
