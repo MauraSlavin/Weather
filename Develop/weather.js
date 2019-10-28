@@ -1,13 +1,14 @@
 var currDate = moment().format('LL');  // current date
-var currCity = "03801,us";       // current city (Portsmouth is the default, if nothing in local storage)
+var currCity = "Boston,us";       // current city (Boston is the default, if nothing in local storage)
 var currTemp;                           // current temperature for current city
 var currHumid;                           // current humidity for current city
 var currWind;                           // current wind speed for current city
 var currLongitude;                    // coordinates for current city
 var currLatitude;                   // coordinates for current city
-var currIconURL;                    // url for icon of current weather conditions
+var currWeatherIcon;               // icon for the current weather
 var currUV;                           // current UV for current city
 var cityHistory;                           // array of of cities previously searched  from localStorage 
+var cityLine;                       // line on page w/ city, date, current weather icon
 var queryWeather;                   // string to query the weather api for current weather conditions
 var queryUV;                   // string to query the weather api for UV
 var appid = "19331ece68ee955fab0ad85c4df262c4";  // for queries to openweathermap.org
@@ -15,7 +16,7 @@ var appid = "19331ece68ee955fab0ad85c4df262c4";  // for queries to openweatherma
 // for testing
 // localStorage.clear();
 cityHistory = {
-    weather: ["03801,us", "10570,us"]
+    weather: ["Boston", "New York"]
 };
 cityHistory = JSON.stringify(cityHistory);
 localStorage.setItem("weather", cityHistory);
@@ -45,39 +46,58 @@ cityHistory.forEach(function (city) {
     var cityListEl = $("<li>");
     cityListEl.addClass("list-option list-group-item");
     cityListEl.text(city);
- //   cityListEl.css("border", "1px solid");
+    //   cityListEl.css("border", "1px solid");
     $(".list-group").prepend(cityListEl);
 
 });
 
-// **** This uses zip code.  Will need to be changed.
-//  queryWeather = `https://api.openweathermap.org/data/2.5/weather?q=${currCity}&units=imperial&APPID=${appid}`;
-queryWeather = `https://api.openweathermap.org/data/2.5/weather?zip=${currCity}&units=imperial&APPID=${appid}`;
+
+// put current city and date on website
+cityLine = `${currCity}          (${currDate.toString()})     `
+$("#cityLine").text(cityLine);
+
+
+// query to get weather info for current city
+queryWeather = `https://api.openweathermap.org/data/2.5/weather?q=${currCity}&units=imperial&appid=${appid}`;
 
 // get current weather.  Need longitude & lattitude to get UV; separate query for weather icon.
 $.ajax({
     url: queryWeather,
     method: "GET"
 }).then(function (response) {
-    console.log(currCity + ":  " + response);
+
     // retrieve all data needed
     currTemp = response.main.temp;
     currHumid = response.main.humidity;
     currWind = response.wind.speed;
     currLongitude = response.coord.lon;
     currLatitude = response.coord.lat;
-    currIconURL = `https://openweathermap.org/img/w/${response.weather[0].icon}.png`;
+
+    // put data we have on the page
+    $("#cityTemp").text(`Temperature:   ${currTemp} \xB0F`);
+    $("#cityHumid").text(`Humidity:   ${currHumid} %`);
+    $("#cityWind").text(`Wind Speed:   ${currWind} MPH`);
+    // link to weather icon
+    currWeatherIcon = `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`;
+    // put on website
+    $("#currWeatherIcon").attr("src", currWeatherIcon);
 
     // query for uv
-    queryUV = `https://api.openweathermap.org/data/2.5/uvi?lat=${currLatitude}&lon=${currLongitude}&APPID=${appid}`;
+    queryUV = `https://api.openweathermap.org/data/2.5/uvi?lat=${currLatitude}&lon=${currLongitude}&appid=${appid}`;
     $.ajax({
         url: queryUV,
         method: "GET"
     }).then(function (uvResponse) {
         // retrieve UV from response
-        currUV = uvResponse.value;
-    });
-
+        currUV = uvResponse.value.toString();
+        $("#dataUV").text(currUV);  // put UV on website
+    },
+        // if ajax request failed
+        function (a, b, c) {
+            console.log("a: " + a + "\nb:  " + b + "\nc:  " + c);
+            $("#dataUV").text("Not available");  // if not found on weather API
+        });
+    jqXHR.then(function (data, textStatus, jqXHR) { }, function (jqXHR, textStatus, errorThrown) { });
 });
 
 

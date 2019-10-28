@@ -1,14 +1,17 @@
 html, body, .container-fluid {
-  height: 100%;                      /* fill screen with background */
+  height: 100%;
+  /* fill screen with background */
 }
 
 body {
-  margin: 20px;  /* space around page, not up against edge of window */
+  margin: 20px;
+  /* space around page, not up against edge of window */
   font-weight: bolder !important;
   font-size: 16px !important;
 }
 
 /* background image for the page */
+
 .bgimg-1 {
   position: relative;
   background-position: center;
@@ -19,24 +22,54 @@ body {
   height: 100%;
 }
 
-#cityList {
-  margin-top: 10px;   /* space between city search & list of previously searched cities */
+#inputCity {
+  width: 100%;
+  /* so search window lines up with list of cities */
+  border-radius: 4px;
+  /* input for city search match style of list of previously searched cities */
+  background-color: rgb(245, 217, 242);
+  /* easier to read without background behind text */
 }
 
-#inputCity {
-  width: 100%;         /* so search window lines up with list of cities */
-  border-radius: 4px;  /* input for city search match style of list of previously searched cities */
-  background-color: rgb(245, 217, 242);   /* easier to read without background behind text */
+#cityList {
+  margin-top: 10px;
+  /* space between city search & list of previously searched cities */
 }
 
 .list-group-item {
-  background-color: rgb(245, 217, 242);   /* easier to read without background behind text */
+  background-color: rgb(245, 217, 242);
+  /* easier to read without background behind text */
+}
+
+#currWeatherRow {
+  /*  margin: 10px; */
+  font-size: 25px;
 }
 
 #currWeather {
-  background-color: rgb(245, 217, 242);   /* easier to read without background behind text */
+  background-color: rgb(245, 217, 242);
+  /* easier to read without background behind text */
 }
 
-#currWeatherRow, #cityTemp, #cityHumid, #cityWind, #cityUV {
+#currWeatherIcon {
+  border-radius: 4px;
+}
+
+#cityTemp, #cityHumid, #cityWind, #cityUV {
   height: 40px;
+  padding: 10px 0;
+}
+
+/*
+#cityTemp {
+  padding-top: 15px;
+}
+*/
+
+#dataUV {
+  margin: 5px;
+  padding: 5px;
+  background-color: red;
+  color: white;
+  border-radius: 4px;
 }

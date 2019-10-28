@@ -39,29 +39,32 @@
 
                 <!-- first row w/city, date & icon -->
                 <div class="row" id="currWeatherRow">
-                    <div class="col-4" id="cityName"></div>
-                    <div class="col-4" id="todayDate"></div>
-                    <div class="col-4" id="weatherIcon"></div>
+                    <div class="col-6" id="cityLine">
+                        <!-- city and date will be added by Javascript -->
+                    </div>
+                    <div class="col-4">
+                        <img class="bg-info" id="currWeatherIcon" alt="Weather Icon" width="50px" height="50px">
+                    </div>
                 </div>
 
                 <!-- Temperature -->
                 <div class="row">
-                    <div class="col-12 ml-3" id="cityTemp">Temperature:</div>
+                    <div class="col-12 ml-4" id="cityTemp">Temperature:</div>
                 </div>
 
                 <!-- Humidity -->
                 <div class="row">
-                    <div class="col-12 ml-3" id="cityHumid">Humidity:</div>
+                    <div class="col-12 ml-4" id="cityHumid">Humidity:</div>
                 </div>
 
                 <!-- Wind Speed -->
                 <div class="row">
-                    <div class="col-12 ml-3" id="cityWind">Wind Speed:</div>
+                    <div class="col-12 ml-4" id="cityWind">Wind Speed:</div>
                 </div>
 
                 <!-- UV Index -->
                 <div class="row">
-                    <div class="col-12 ml-3" id="cityUV">UV Index:</div>
+                    <div class="col-3 ml-4" id="cityUV">UV Index: <span id="dataUV"></span></div>
                 </div>
 
             </div>
