@@ -52,6 +52,7 @@ body {
 
 #currWeather {
   background-color: rgb(245, 217, 242);
+  padding-bottom: 15px;
   /* easier to read without background behind text */
 }
 
