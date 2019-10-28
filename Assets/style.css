@@ -22,6 +22,10 @@ body {
   height: 100%;
 }
 
+.jumbotron {
+  padding: 20px;
+}
+
 #inputCity {
   width: 100%;
   /* so search window lines up with list of cities */

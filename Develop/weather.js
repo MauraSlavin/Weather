@@ -1,4 +1,4 @@
-var currDate = moment().format('LL');  // current date
+var currDate = moment().format('L');  // current date
 var currCity = "Boston,us";       // current city (Boston is the default, if nothing in local storage)
 var currTemp;                           // current temperature for current city
 var currHumid;                           // current humidity for current city
