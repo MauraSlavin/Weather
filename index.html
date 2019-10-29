@@ -35,40 +35,87 @@
 
             <!--  Selected city current forecast, then 5 day forecast -->
             <div class="col-9" id="currWeather">
-                <!-- box for current weather conditions. -->
+                <div>
+                    <!-- for right side of page -->
+                    <!-- box for current weather conditions. -->
+                    <div id="currCityConditionsBox">
+                        <!-- first row w/city, date & icon -->
+                        <div class="row" id="currWeatherRow">
+                            <div class="col-4" id="cityLine">
+                                <!-- city and date will be added by Javascript -->
+                            </div>
+                            <div class="col-1">
+                                <img class="bg-info" id="currWeatherIcon" alt="Weather Icon">
+                            </div>
+                        </div> <!-- end of currWeatherRow -->
 
-                <!-- first row w/city, date & icon -->
-                <div class="row" id="currWeatherRow">
-                    <div class="col-4" id="cityLine">
-                        <!-- city and date will be added by Javascript -->
+                        <!-- Temperature -->
+                        <div class="row">
+                            <div class="col-12 ml-4" id="cityTemp">Temperature:</div>
+                        </div>
+
+                        <!-- Humidity -->
+                        <div class="row">
+                            <div class="col-12 ml-4" id="cityHumid">Humidity:</div>
+                        </div>
+
+                        <!-- Wind Speed -->
+                        <div class="row">
+                            <div class="col-12 ml-4" id="cityWind">Wind Speed:</div>
+                        </div>
+
+                        <!-- UV Index -->
+                        <div class="row">
+                            <div class="col-3 ml-4" id="cityUV">UV Index: <span id="dataUV"></span></div>
+                        </div>
+                    </div> <!-- of currCityConditionsBox -->
+                </div> <!-- of right side of page -->
+
+                <div id="all5DayForecast">
+                    <!-- for 5 day forecast -->
+
+                    <!-- 5 day forecast header -->
+                    <div class="row" id="forecastHeader">
+                        5-Day Forecast:
                     </div>
-                    <div class="col-1">
-                        <img class="bg-info" id="currWeatherIcon" alt="Weather Icon" width="50px" height="50px">
+
+                    <!-- row with 5 day forecast in it -->
+                    <div class="row">
+
+                        <div class="col-2 card bg-info">
+                            <div class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+
+                        <div class="col-2 card bg-info">
+                            <div class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+
+                        <div class="col-2 card bg-info">
+                            <div class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+
+                        <div class="col-2 card bg-info">
+                            <div class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+
+                        <div class="col-2 card bg-info">
+                            <div class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-
-                <!-- Temperature -->
-                <div class="row">
-                    <div class="col-12 ml-4" id="cityTemp">Temperature:</div>
-                </div>
-
-                <!-- Humidity -->
-                <div class="row">
-                    <div class="col-12 ml-4" id="cityHumid">Humidity:</div>
-                </div>
-
-                <!-- Wind Speed -->
-                <div class="row">
-                    <div class="col-12 ml-4" id="cityWind">Wind Speed:</div>
-                </div>
-
-                <!-- UV Index -->
-                <div class="row">
-                    <div class="col-3 ml-4" id="cityUV">UV Index: <span id="dataUV"></span></div>
-                </div>
-
-            </div>
-        </div>
+                </div> <!-- for 5 day forecast block -->
+            </div> <!-- for currWeather -->
+        </div> <!-- everything except header -->
 
 
 

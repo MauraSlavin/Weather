@@ -45,19 +45,30 @@ body {
   /* easier to read without background behind text */
 }
 
-#currWeatherRow {
+#currCityConditionsBox {
+  border: solid 1px gray;
+}
+
+#currWeatherRow, #forecastHeader {
   /*  margin: 10px; */
   font-size: 25px;
+}
+
+#all5DayForecast {
+  padding: 15px;
 }
 
 #currWeather {
   background-color: rgb(245, 217, 242);
   padding-bottom: 15px;
+  padding-top: 15px;
   /* easier to read without background behind text */
 }
 
 #currWeatherIcon {
   border-radius: 4px;
+  width: 50px;
+  height: 50px;
 }
 
 #cityTemp, #cityHumid, #cityWind, #cityUV {
@@ -65,16 +76,19 @@ body {
   padding: 10px 0;
 }
 
-/*
-#cityTemp {
-  padding-top: 15px;
-}
-*/
-
 #dataUV {
   margin: 5px;
   padding: 5px;
   background-color: red;
   color: white;
   border-radius: 4px;
+}
+
+.card {
+  height: 200px;
+  margin: 15px;
+}
+
+.card:first-child {
+  margin-left: 0px;
 }
