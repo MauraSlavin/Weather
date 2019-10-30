@@ -3,9 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" href="./Assets/style.css">
     <title>Document</title>
 </head>
@@ -66,7 +69,7 @@
 
                         <!-- UV Index -->
                         <div class="row">
-                            <div class="col-3 ml-4" id="cityUV">UV Index: <span id="dataUV"></span></div>
+                            <div class="col-12 ml-4" id="cityUV">UV Index: <span id="dataUV"></span></div>
                         </div>
                     </div> <!-- of currCityConditionsBox -->
                 </div> <!-- of right side of page -->
@@ -80,9 +83,9 @@
                     </div>
 
                     <!-- row with 5 day forecast in it -->
-                    <div class="row" id="fore5row">
+                    <div class="row d-md-flex flex-wrap flex-row" id="fore5row">
 
-                        <div class="col-2 card bg-info m-auto ml-0">
+                        <div class="col-lg-2 col-sm-5 col-xs-12 card bg-info mx-2 mb-3 ml-0 mw-150">
                             <div class="card-body">
                                 <p id="fore5date0"></p>
                                 <img alt="weather icon" class="fore5img" id="iconDay0">
@@ -91,7 +94,7 @@
                             </div>
                         </div>
 
-                        <div class="col-2 card bg-info m-auto">
+                        <div class="col-lg-2 col-sm-5 col-xs-12 card bg-info mx-2 mb-3 mw-150">
                             <div class="card-body">
                                 <p id="fore5date1"></p>
                                 <img alt="weather icon" class="fore5img" id="iconDay1">
@@ -100,7 +103,7 @@
                             </div>
                         </div>
 
-                        <div class="col-2 card bg-info m-auto">
+                        <div class="col-lg-2 col-sm-5 col-xs-12 card bg-info mx-2 mb-3 mw-150">
                             <div class="card-body">
                                 <p id="fore5date2"></p>
                                 <img alt="weather icon" class="fore5img" id="iconDay2">
@@ -109,7 +112,7 @@
                             </div>
                         </div>
 
-                        <div class="col-2 card bg-info m-auto">
+                        <div class="col-lg-2 col-sm-5 col-xs-12 card bg-info mx-2 mb-3 mw-150">
                             <div class="card-body">
                                 <p id="fore5date3"></p>
                                 <img alt="weather icon" class="fore5img" id="iconDay3">
@@ -118,7 +121,7 @@
                             </div>
                         </div>
 
-                        <div class="col-2 card bg-info m-auto mr-0">
+                        <div class="col-lg-2 col-sm-5 col-xs-12 card bg-info mx-2 mb-3 mr-0 mw-150">
                             <div class="card-body">
                                 <p id="fore5date4"></p>
                                 <img alt="weather icon" class="fore5img" id="iconDay4">

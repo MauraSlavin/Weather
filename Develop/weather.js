@@ -167,6 +167,5 @@ $.ajax({
         $(`#fore5temp${i}`).text(`Max temp:  ${days[i].temp} \u00B0F`);
         $(`#fore5humid${i}`).text(`Max humidity:  ${days[i].humid}%`);
 
-    });
-});
-
+    });  // end of for each day in days array
+});  // end of then part of query for 5 day forecast

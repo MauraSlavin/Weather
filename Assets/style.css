@@ -1,7 +1,7 @@
 /* fill background with image */
-html, body { 
+html, body {
   /* Image from https://stock.adobe.com/search?load_type=search&native_visual_search=&similar_content_id=&is_recent_search=&search_type=usertyped&k=sunset&asset_id=265728175 */
-  background: url(clouds.jpg) no-repeat center center fixed; 
+  background: url(clouds.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -27,24 +27,25 @@ p {
 #inputCity {
   width: 100%;
   /* so search window lines up with list of cities */
-  border-radius: 4px;
+  border-radius: 4px;     /* consistent box styles */
   /* input for city search match style of list of previously searched cities */
   background-color: rgb(245, 217, 242);
   /* easier to read without background behind text */
 }
 
 #cityList {
-  margin-top: 10px;
   /* space between city search & list of previously searched cities */
+  margin-top: 10px;
 }
 
 .list-group-item {
-  background-color: rgb(245, 217, 242);
   /* easier to read without background behind text */
+  background-color: rgb(245, 217, 242);
 }
 
 #currCityConditionsBox {
   border: solid 1px gray;
+  border-radius: 4px;  /* consistent box styles */
   padding: 10px;
 }
 
@@ -65,7 +66,7 @@ p {
 }
 
 #currWeatherIcon {
-  border-radius: 4px;
+  border-radius: 4px;  /* consistent box styles */
   width: 50px;
   height: 50px;
 }
@@ -75,32 +76,37 @@ p {
   padding: 10px 0;
 }
 
+/* to highlight UV index */
 #dataUV {
   margin: 5px;
   padding: 5px;
   background-color: red;
   color: white;
-  border-radius: 4px;
+  border-radius: 4px;     /* consistent box styles */
 }
 
+.card {
+  padding-left: 7px;
+}
+
+/* to line up with header for 5 day forecast */
 #fore5row {
   margin-left: -30px;
 }
 
-.card:first-child {
-  margin-left: 0px;
-}
-
 .card-body {
-  padding-left: 0;
+  padding: 10px;
 }
 
+
+/* size of weather icon image in the 5 day forecast */
 .fore5img {
   width: 45px;
   height: 45px;
   margin-bottom: 10px;
 }
 
+/* biggest that date will fit on all screen sizes without wrapping */
 #fore5date0, #fore5date1, #fore5date2, #fore5date3, #fore5date4 {
-  font-size: 19px;
+  font-size: 12.5px;
 }
