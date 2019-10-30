@@ -92,3 +92,7 @@ body {
 .card:first-child {
   margin-left: 0px;
 }
+
+.card-body {
+  padding-left: 0;
+}

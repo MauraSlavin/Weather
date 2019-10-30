@@ -12,6 +12,19 @@ var cityLine;                       // line on page w/ city, date, current weath
 var queryWeather;                   // string to query the weather api for current weather conditions
 var queryUV;                   // string to query the weather api for UV
 var appid = "19331ece68ee955fab0ad85c4df262c4";  // for queries to openweathermap.org
+var query5Day;                   // string to query the weather api for the 5 day forecast
+var icons5Day = [];              // array with 5 days of weather icons
+var temps5Day = [];                // array with 5 days of temperatures
+var humids5Day = [];                // array with 5 days of humidity
+
+var day = {                     // info for a day in the forecast
+    dt: "",                     // date of forecast
+    ic: "",                     // icon for this day's forecast
+    temp: 0,                     // high temp for this day's forecast
+    humid: 0                     // high humidity for this day's forecast
+};
+
+var days = [];                     // array of day objects, one for each day of the forecast
 
 // for testing
 // localStorage.clear();
@@ -65,7 +78,6 @@ $.ajax({
     url: queryWeather,
     method: "GET"
 }).then(function (response) {
-
     // retrieve all data needed
     currTemp = response.main.temp;
     currHumid = response.main.humidity;
@@ -91,15 +103,64 @@ $.ajax({
         // retrieve UV from response
         currUV = uvResponse.value.toString();
         $("#dataUV").text(currUV);  // put UV on website
-    },
+    },  // ******  check this!! 
         // if ajax request failed
         function (a, b, c) {
-            console.log("a: " + a + "\nb:  " + b + "\nc:  " + c);
+            //    console.log("a: " + a + "\nb:  " + b + "\nc:  " + c);
             $("#dataUV").text("Not available");  // if not found on weather API
         });
-    jqXHR.then(function (data, textStatus, jqXHR) { }, function (jqXHR, textStatus, errorThrown) { });
+
 });
 
+// query to get weather info for current city
+query5Day = `https://api.openweathermap.org/data/2.5/forecast?q=${currCity},us&units=imperial&appid=${appid}`;
+//              api.openweathermap.org/data/2.5/forecast?q=$
+// get current weather.  Need longitude & lattitude to get UV; separate query for weather icon.
+$.ajax({
+    url: query5Day,
+    method: "GET"
+}).then(function (response) {
+    var d = -1;   // index into days array
+    console.log("begin... day: " + day + ";  days: " + days);
+    response.list.forEach(function (forecast3Hr, index) {   // for each 3 hour forecast retrieved
+        var thisDate = forecast3Hr.dt_txt;                  // get the date of the forecast for this record
+        thisDate = thisDate.substring(0, thisDate.indexOf(" "));
+        if (moment().format("YYYY-MM-DD") != thisDate) {  // skip if it's a forecast for later "today"
+            if (thisDate != day.dt) {   // if a new date
+                if (d != -1) {                      // if not the first
+                    var pushDay = {};
+                    pushDay.dt = day.dt;               // push copy of object, not reference to object
+                    pushDay.ic = day.ic;
+                    pushDay.temp = day.temp;
+                    pushDay.humid = day.humid;
+                    days.push(pushDay);                 // push the day object onto the days array
+                };  // end of if not the first day
+                d++;                            // increment the count of which forecast day you are on
+                day.dt = thisDate;                  // initialize date for this forecast date
+                day.ic = `http://openweathermap.org/img/wn/${forecast3Hr.weather[0].icon}@2x.png`;  // set the icon
+                day.temp = forecast3Hr.main.temp;   // set the temp
+                day.humid = forecast3Hr.main.humidity;  // set the humidity
+            }  // of if different date
+            else {                                  // if we've hit a new date
+                if (forecast3Hr.main.temp > day.temp) {   // replace the temp if the new one is higher
+                    day.temp = forecast3Hr.main.temp;
+                };
+                if (forecast3Hr.main.humidity > day.humid) {    // replace the humidity if the new one is higher
+                    day.humid = forecast3Hr.main.humidity;
+                };
+                console.log("thisDate: " + thisDate + ";  d: " + d + "; day: " + day + ";  days: " + days);
+
+            };  // of else (same date)
+        };   // of if forecast for later today (moment = currDate)
+    });  // of forEach 3 hour forecast object from the API
+    var pushDay = {};
+    pushDay.dt = day.dt;               // push copy of object, not reference to object
+    pushDay.ic = day.ic;
+    pushDay.temp = day.temp;
+    pushDay.humid = day.humid;
+    days.push(pushDay);                 // push the day object onto the days array
+    console.log("days: " + days);
 
 
+});
 
