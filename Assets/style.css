@@ -10,6 +10,12 @@ body {
   font-size: 16px !important;
 }
 
+p {
+  font-size: 11.5px;
+  color: white;
+}
+
+
 /* background image for the page */
 
 .bgimg-1 {
@@ -95,4 +101,14 @@ body {
 
 .card-body {
   padding-left: 0;
+}
+
+.fore5img {
+  width: 45px;
+  height: 45px;
+  margin-bottom: 10px;
+}
+
+#fore5date0, #fore5date1, #fore5date2, #fore5date3, #fore5date4 {
+  font-size: 19px;
 }

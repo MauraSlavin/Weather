@@ -131,14 +131,14 @@ $.ajax({
                     var pushDay = {};
                     pushDay.dt = day.dt;               // push copy of object, not reference to object
                     pushDay.ic = day.ic;
-                    pushDay.temp = day.temp;
+                    pushDay.temp = Math.round(day.temp);
                     pushDay.humid = day.humid;
                     days.push(pushDay);                 // push the day object onto the days array
                 };  // end of if not the first day
                 d++;                            // increment the count of which forecast day you are on
                 day.dt = thisDate;                  // initialize date for this forecast date
                 day.ic = `http://openweathermap.org/img/wn/${forecast3Hr.weather[0].icon}@2x.png`;  // set the icon
-                day.temp = forecast3Hr.main.temp;   // set the temp
+                day.temp = Math.round(forecast3Hr.main.temp);   // set the temp
                 day.humid = forecast3Hr.main.humidity;  // set the humidity
             }  // of if different date
             else {                                  // if we've hit a new date
@@ -156,11 +156,17 @@ $.ajax({
     var pushDay = {};
     pushDay.dt = day.dt;               // push copy of object, not reference to object
     pushDay.ic = day.ic;
-    pushDay.temp = day.temp;
+    pushDay.temp = Math.round(day.temp);
     pushDay.humid = day.humid;
     days.push(pushDay);                 // push the day object onto the days array
     console.log("days: " + days);
 
+    days.forEach(function (day, i) {
+        $(`#fore5date${i}`).text(days[i].dt);
+        $(`#iconDay${i}`).attr("src", days[i].ic);
+        $(`#fore5temp${i}`).text(`Max temp:  ${days[i].temp} \u00B0F`);
+        $(`#fore5humid${i}`).text(`Max humidity:  ${days[i].humid}%`);
 
+    });
 });
 
