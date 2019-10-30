@@ -46,7 +46,11 @@ cityHistory = JSON.parse(cityHistory);
 // "working" cityHistory  is an array of previously searched cities
 //  if nothing in local storage, defaults to what it was initialized to
 if (cityHistory != null) {
-    cityHistory = cityHistory.weather;        // set current city to most recent city, when page is first loaded.
+    var cityArray = [];
+    cityHistory.forEach(function (city, i) {
+        cityArray.push(city);
+    }); // of for each city in cityHistory
+    cityHistory = cityArray;        // set current city to most recent city, when page is first loaded.
     currCity = cityHistory[0];              // defaults to Portsmouth NH (in declaration)  
 }
 else {
@@ -59,8 +63,8 @@ cityHistory.forEach(function (city) {
     var cityListEl = $("<li>");
     cityListEl.addClass("list-option list-group-item");
     cityListEl.text(city);
-    //   cityListEl.css("border", "1px solid");
-    $(".list-group").prepend(cityListEl);
+// cities are ordered most recently searched first in localStorage, so display them in order.
+    $(".list-group").append(cityListEl);
 
 });
 
@@ -170,9 +174,18 @@ console.log("just before event listener");
 // Read user's input
 $("button").click(function (event) {
     event.preventDefault();
+
+    // save currCity in local storage (add to beginning, so it appears at the top of the list), and re-display page 
     currCity = $(".inputCity").val();
     console.log("Input city (currCity):  " + currCity);
     console.log(event);
+
+
+    cityHistory.unshift(currCity);
+    cityHistory = JSON.stringify(cityHistory);
+    localStorage.setItem("weather", cityHistory);
+
+    window.open("./index.html", "_self");  //  refresh page with new current city (which will also be added to list of searched cities)
 });
 
 
