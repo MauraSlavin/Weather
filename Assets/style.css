@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 /* fill background with image */
 html, body {
   /* Image from https://stock.adobe.com/search?load_type=search&native_visual_search=&similar_content_id=&is_recent_search=&search_type=usertyped&k=sunset&asset_id=265728175 */
@@ -20,44 +24,73 @@ p {
   color: white;
 }
 
+/* line to prompt for the city to search */
+#searchP {
+  font-weight: bold;
+  font-size: 20px;
+  color: black; 
+  margin: 0;
+  padding: 0;
+}
+
 .jumbotron {
   padding: 20px;
 }
 
-#inputCity {
+/* form has a textarea to input the city to search for, and a submit button to do the search */
+form {
+  display:inline-block;
+  position:relative;
   width: 100%;
-  /* so search window lines up with list of cities */
-  border-radius: 4px;     /* consistent box styles */
-  /* input for city search match style of list of previously searched cities */
-  background-color: rgb(245, 217, 242);
-  /* easier to read without background behind text */
 }
 
+/* this is the submit button that goes with the textarea to search for a city's weather in the form */
+/* place it on the end of the textarea */
+button {
+  position:absolute;
+  bottom:1px;
+  right:1px;
+  width: 36px;
+  height: 36px;
+  background-color: violet;
+}
+
+/* this is the textarea in the form to search for a city's weather (goes with submit button) */
+textarea {
+  display:block;
+}
+
+/* list of cities previously searched */
 #cityList {
   /* space between city search & list of previously searched cities */
   margin-top: 10px;
 }
 
+/* li for city names previously searched */
 .list-group-item {
-  /* easier to read without background behind text */
+  /* easier to read city names without background behind text */
   background-color: rgb(245, 217, 242);
 }
 
+/* box with current conditions of searched city */
 #currCityConditionsBox {
   border: solid 1px gray;
   border-radius: 4px;  /* consistent box styles */
   padding: 10px;
 }
 
+/* currweatherrow has the city, date and weather of the searched city's current weather */
 #currWeatherRow, #forecastHeader {
   /*  margin: 10px; */
   font-size: 25px;
 }
 
+/* box with all 5 days of the forecast */
 #all5DayForecast {
   padding: 15px;
 }
 
+/* box with all the current weather information of the city searched */
 #currWeather {
   background-color: rgb(245, 217, 242);
   padding-bottom: 15px;
@@ -65,12 +98,14 @@ p {
   /* easier to read without background behind text */
 }
 
-#currWeatherIcon {
+/* weather icon for the city searched, and in the forecast */
+#currWeatherIcon, .fore5img {
   border-radius: 4px;  /* consistent box styles */
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
 }
 
+/* weather details for the city searched */
 #cityTemp, #cityHumid, #cityWind, #cityUV {
   height: 40px;
   padding: 10px 0;
@@ -85,28 +120,28 @@ p {
   border-radius: 4px;     /* consistent box styles */
 }
 
+/* card used to hold each of the forecast days */
 .card {
   padding-left: 7px;
 }
 
 /* to line up with header for 5 day forecast */
+/* fore5row is the row with all 5 days of the forecast */
 #fore5row {
   margin-left: -30px;
 }
 
+/* for each of the forecast days */
 .card-body {
   padding: 10px;
 }
 
-
 /* size of weather icon image in the 5 day forecast */
 .fore5img {
-  width: 45px;
-  height: 45px;
   margin-bottom: 10px;
 }
 
-/* biggest that date will fit on all screen sizes without wrapping */
+/* biggest fonr that forecast date will fit on all screen sizes without wrapping */
 #fore5date0, #fore5date1, #fore5date2, #fore5date3, #fore5date4 {
   font-size: 12.5px;
 }

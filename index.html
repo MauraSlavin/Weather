@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- gets search icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="./Assets/style.css">
     <title>Document</title>
@@ -27,9 +28,16 @@
 
             <!-- First column has search & history list of cities -->
             <div class="col-3" id="searchPrompt">
+                <p id="searchP">Search for a City:</p>
+                <!--    <label for="inputCity" id="inputCityPrompt">Search city: </label>
+                    <input type="text" class="form-contro searchInput" name="inputCity" id="inputCity">
+                -->
+
                 <!-- prompt to input city -->
-                <label for="inputCity" id="inputCityPrompt">Search city: </label>
-                <input type="text" class="form-contro searchInput" name="inputCity" id="inputCity">
+                <form>
+                    <textarea class="form-control rounded-4 text-dark border border-dark inputCity" rows="1"></textarea>
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
 
                 <ul class="list-group" id="cityList">
                     <!-- previously searched cities will be added by js here -->
@@ -83,6 +91,7 @@
                     </div>
 
                     <!-- row with 5 day forecast in it -->
+                    <!-- could probably use fewer classes (without the numbers at the end), and values to differentiate days -->
                     <div class="row d-md-flex flex-wrap flex-row" id="fore5row">
 
                         <div class="col-lg-2 col-sm-5 col-xs-12 card bg-info mx-2 mb-3 ml-0 mw-150">

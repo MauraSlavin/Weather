@@ -1,5 +1,5 @@
 var currDate = moment().format('L');  // current date
-var currCity = "Boston,us";       // current city (Boston is the default, if nothing in local storage)
+var currCity = "London";       // current city (Boston is the default, if nothing in local storage)
 var currTemp;                           // current temperature for current city
 var currHumid;                           // current humidity for current city
 var currWind;                           // current wind speed for current city
@@ -28,11 +28,11 @@ var days = [];                     // array of day objects, one for each day of 
 
 // for testing
 // localStorage.clear();
-cityHistory = {
-    weather: ["Boston", "New York"]
-};
-cityHistory = JSON.stringify(cityHistory);
-localStorage.setItem("weather", cityHistory);
+// cityHistory = {
+//     weather: ["Boston", "New York"]
+// };
+// cityHistory = JSON.stringify(cityHistory);
+// localStorage.setItem("weather", cityHistory);
 // console.log("history:  " + cityHistory);
 // ***  end of test code
 
@@ -90,7 +90,7 @@ $.ajax({
     $("#cityHumid").text(`Humidity:   ${currHumid} %`);
     $("#cityWind").text(`Wind Speed:   ${currWind} MPH`);
     // link to weather icon
-    currWeatherIcon = `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`;
+    currWeatherIcon = `http://openweathermap.org/img/w/${response.weather[0].icon}.png`;
     // put on website
     $("#currWeatherIcon").attr("src", currWeatherIcon);
 
@@ -121,7 +121,6 @@ $.ajax({
     method: "GET"
 }).then(function (response) {
     var d = -1;   // index into days array
-    console.log("begin... day: " + day + ";  days: " + days);
     response.list.forEach(function (forecast3Hr, index) {   // for each 3 hour forecast retrieved
         var thisDate = forecast3Hr.dt_txt;                  // get the date of the forecast for this record
         thisDate = thisDate.substring(0, thisDate.indexOf(" "));
@@ -137,7 +136,7 @@ $.ajax({
                 };  // end of if not the first day
                 d++;                            // increment the count of which forecast day you are on
                 day.dt = thisDate;                  // initialize date for this forecast date
-                day.ic = `http://openweathermap.org/img/wn/${forecast3Hr.weather[0].icon}@2x.png`;  // set the icon
+                day.ic = `http://openweathermap.org/img/w/${forecast3Hr.weather[0].icon}.png`;  // set the icon
                 day.temp = Math.round(forecast3Hr.main.temp);   // set the temp
                 day.humid = forecast3Hr.main.humidity;  // set the humidity
             }  // of if different date
@@ -148,7 +147,6 @@ $.ajax({
                 if (forecast3Hr.main.humidity > day.humid) {    // replace the humidity if the new one is higher
                     day.humid = forecast3Hr.main.humidity;
                 };
-                console.log("thisDate: " + thisDate + ";  d: " + d + "; day: " + day + ";  days: " + days);
 
             };  // of else (same date)
         };   // of if forecast for later today (moment = currDate)
@@ -159,7 +157,6 @@ $.ajax({
     pushDay.temp = Math.round(day.temp);
     pushDay.humid = day.humid;
     days.push(pushDay);                 // push the day object onto the days array
-    console.log("days: " + days);
 
     days.forEach(function (day, i) {
         $(`#fore5date${i}`).text(days[i].dt);
@@ -169,3 +166,13 @@ $.ajax({
 
     });  // end of for each day in days array
 });  // end of then part of query for 5 day forecast
+console.log("just before event listener");
+// Read user's input
+$("button").click(function (event) {
+    event.preventDefault();
+    currCity = $(".inputCity").val();
+    console.log("Input city (currCity):  " + currCity);
+    console.log(event);
+});
+
+
