@@ -1,5 +1,5 @@
 var currDate = moment().format('L');  // current date
-var currCity = "London";       // current city (Boston is the default, if nothing in local storage)
+var currCity = "Boston";       // current city (Boston is the default, if nothing in local storage)
 var currTemp;                           // current temperature for current city
 var currHumid;                           // current humidity for current city
 var currWind;                           // current wind speed for current city
