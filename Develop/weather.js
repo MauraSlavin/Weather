@@ -79,7 +79,7 @@ $.ajax({
     method: "GET"
 }).then(function (response) {
     // retrieve all data needed
-    currTemp = response.main.temp;
+    currTemp = Math.round(response.main.temp);
     currHumid = response.main.humidity;
     currWind = response.wind.speed;
     currLongitude = response.coord.lon;
