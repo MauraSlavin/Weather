@@ -42,150 +42,174 @@ cityHistory = localStorage.getItem("weather");
 cityHistory = JSON.parse(cityHistory);
 
 
-
-// "working" cityHistory  is an array of previously searched cities
-//  if nothing in local storage, defaults to what it was initialized to
-if (cityHistory != null) {
-    var cityArray = [];
-    cityHistory.forEach(function (city, i) {
-        cityArray.push(city);
-    }); // of for each city in cityHistory
-    cityHistory = cityArray;        // set current city to most recent city, when page is first loaded.
-    currCity = cityHistory[0];              // defaults to Portsmouth NH (in declaration)  
-}
-else {
-    cityHistory = [];                   // set cityHistory to an empy array, if no previously searched cities in local Storage
-};
-
-
-// Put search history on page
-cityHistory.forEach(function (city) {
-    var cityListEl = $("<li>");
-    cityListEl.addClass("list-option list-group-item");
-    cityListEl.text(city);
-// cities are ordered most recently searched first in localStorage, so display them in order.
-    $(".list-group").append(cityListEl);
-
-});
-
-
-// put current city and date on website
-cityLine = `${currCity}          (${currDate.toString()})     `
-$("#cityLine").text(cityLine);
+function initCityHistory() {
+    // "working" cityHistory  is an array of previously searched cities
+    //  if nothing in local storage, defaults to what it was initialized to
+    if (cityHistory != null) {
+        var cityArray = [];
+        cityHistory.forEach(function (city, i) {
+            cityArray.push(city);
+        }); // of for each city in cityHistory
+        cityHistory = cityArray;        // set current city to most recent city, when page is first loaded.
+        currCity = cityHistory[0];              // defaults to Portsmouth NH (in declaration)  
+    }
+    else {
+        cityHistory = [];                   // set cityHistory to an empy array, if no previously searched cities in local Storage
+    };
+    // Put search history on page
+    cityHistory.forEach(function (city) {
+        var cityListEl = $("<li>");
+        cityListEl.addClass("list-option list-group-item");
+        cityListEl.text(city);
+        // cities are ordered most recently searched first in localStorage, so display them in order.
+        $(".list-group").append(cityListEl);
+    });
+    return;
+};  // end of initCityHistory function
 
 
-// query to get weather info for current city
-queryWeather = `https://api.openweathermap.org/data/2.5/weather?q=${currCity}&units=imperial&appid=${appid}`;
+// Put the current  on the page
+function putCurrWeather() {
 
-// get current weather.  Need longitude & lattitude to get UV; separate query for weather icon.
-$.ajax({
-    url: queryWeather,
-    method: "GET"
-}).then(function (response) {
-    // retrieve all data needed
-    currTemp = Math.round(response.main.temp);
-    currHumid = response.main.humidity;
-    currWind = response.wind.speed;
-    currLongitude = response.coord.lon;
-    currLatitude = response.coord.lat;
+    // put current city and date on website
+    cityLine = `${currCity}          (${currDate.toString()})     `
+    $("#cityLine").text(cityLine);
 
-    // put data we have on the page
-    $("#cityTemp").text(`Temperature:   ${currTemp} \xB0F`);
-    $("#cityHumid").text(`Humidity:   ${currHumid} %`);
-    $("#cityWind").text(`Wind Speed:   ${currWind} MPH`);
-    // link to weather icon
-    currWeatherIcon = `http://openweathermap.org/img/w/${response.weather[0].icon}.png`;
-    // put on website
-    $("#currWeatherIcon").attr("src", currWeatherIcon);
 
-    // query for uv
-    queryUV = `https://api.openweathermap.org/data/2.5/uvi?lat=${currLatitude}&lon=${currLongitude}&appid=${appid}`;
+    // query to get weather info for current city
+    queryWeather = `https://api.openweathermap.org/data/2.5/weather?q=${currCity}&units=imperial&appid=${appid}`;
+
+    // get current weather.  Need longitude & lattitude to get UV; separate query for weather icon.
     $.ajax({
-        url: queryUV,
+        url: queryWeather,
         method: "GET"
-    }).then(function (uvResponse) {
-        // retrieve UV from response
-        currUV = uvResponse.value.toString();
-        $("#dataUV").text(currUV);  // put UV on website
-    },  // ******  check this!! 
-        // if ajax request failed
-        function (a, b, c) {
-            //    console.log("a: " + a + "\nb:  " + b + "\nc:  " + c);
-            $("#dataUV").text("Not available");  // if not found on weather API
-        });
+    }).then(function (response) {
+        // retrieve all data needed
+        currTemp = Math.round(response.main.temp);
+        currHumid = response.main.humidity;
+        currWind = response.wind.speed;
+        currLongitude = response.coord.lon;
+        currLatitude = response.coord.lat;
 
-});
+        // put data we have on the page
+        $("#cityTemp").text(`Temperature:   ${currTemp} \xB0F`);
+        $("#cityHumid").text(`Humidity:   ${currHumid} %`);
+        $("#cityWind").text(`Wind Speed:   ${currWind} MPH`);
+        // link to weather icon
+        currWeatherIcon = `http://openweathermap.org/img/w/${response.weather[0].icon}.png`;
+        // put on website
+        $("#currWeatherIcon").attr("src", currWeatherIcon);
 
-// query to get weather info for current city
-query5Day = `https://api.openweathermap.org/data/2.5/forecast?q=${currCity},us&units=imperial&appid=${appid}`;
-//              api.openweathermap.org/data/2.5/forecast?q=$
-// get current weather.  Need longitude & lattitude to get UV; separate query for weather icon.
-$.ajax({
-    url: query5Day,
-    method: "GET"
-}).then(function (response) {
-    var d = -1;   // index into days array
-    response.list.forEach(function (forecast3Hr, index) {   // for each 3 hour forecast retrieved
-        var thisDate = forecast3Hr.dt_txt;                  // get the date of the forecast for this record
-        thisDate = thisDate.substring(0, thisDate.indexOf(" "));
-        if (moment().format("YYYY-MM-DD") != thisDate) {  // skip if it's a forecast for later "today"
-            if (thisDate != day.dt) {   // if a new date
-                if (d != -1) {                      // if not the first
-                    var pushDay = {};
-                    pushDay.dt = day.dt;               // push copy of object, not reference to object
-                    pushDay.ic = day.ic;
-                    pushDay.temp = Math.round(day.temp);
-                    pushDay.humid = day.humid;
-                    days.push(pushDay);                 // push the day object onto the days array
-                };  // end of if not the first day
-                d++;                            // increment the count of which forecast day you are on
-                day.dt = thisDate;                  // initialize date for this forecast date
-                day.ic = `http://openweathermap.org/img/w/${forecast3Hr.weather[0].icon}.png`;  // set the icon
-                day.temp = Math.round(forecast3Hr.main.temp);   // set the temp
-                day.humid = forecast3Hr.main.humidity;  // set the humidity
-            }  // of if different date
-            else {                                  // if we've hit a new date
-                if (forecast3Hr.main.temp > day.temp) {   // replace the temp if the new one is higher
-                    day.temp = forecast3Hr.main.temp;
-                };
-                if (forecast3Hr.main.humidity > day.humid) {    // replace the humidity if the new one is higher
-                    day.humid = forecast3Hr.main.humidity;
-                };
+        // query for uv
+        queryUV = `https://api.openweathermap.org/data/2.5/uvi?lat=${currLatitude}&lon=${currLongitude}&appid=${appid}`;
+        $.ajax({
+            url: queryUV,
+            method: "GET"
+        }).then(function (uvResponse) {
+            // retrieve UV from response
+            currUV = uvResponse.value.toString();
+            $("#dataUV").text(currUV);  // put UV on website
+        },  // ******  check this!! 
+            // if ajax request failed
+            function (a, b, c) {
+                //    console.log("a: " + a + "\nb:  " + b + "\nc:  " + c);
+                $("#dataUV").text("Not available");  // if not found on weather API
+            });
 
-            };  // of else (same date)
-        };   // of if forecast for later today (moment = currDate)
-    });  // of forEach 3 hour forecast object from the API
-    var pushDay = {};
-    pushDay.dt = day.dt;               // push copy of object, not reference to object
-    pushDay.ic = day.ic;
-    pushDay.temp = Math.round(day.temp);
-    pushDay.humid = day.humid;
-    days.push(pushDay);                 // push the day object onto the days array
-
-    days.forEach(function (day, i) {
-        $(`#fore5date${i}`).text(days[i].dt);
-        $(`#iconDay${i}`).attr("src", days[i].ic);
-        $(`#fore5temp${i}`).text(`Max temp:  ${days[i].temp} \u00B0F`);
-        $(`#fore5humid${i}`).text(`Max humidity:  ${days[i].humid}%`);
-
-    });  // end of for each day in days array
-});  // end of then part of query for 5 day forecast
-console.log("just before event listener");
-// Read user's input
-$("button").click(function (event) {
-    event.preventDefault();
-
-    // save currCity in local storage (add to beginning, so it appears at the top of the list), and re-display page 
-    currCity = $(".inputCity").val();
-    console.log("Input city (currCity):  " + currCity);
-    console.log(event);
+    });
+    return;
+};  // end of putCurrWeather function
 
 
-    cityHistory.unshift(currCity);
-    cityHistory = JSON.stringify(cityHistory);
-    localStorage.setItem("weather", cityHistory);
+// Put 5 day forecast on the page (including necesary queries)
+function putForecast() {
+    // query to get weather info for current city
+    query5Day = `https://api.openweathermap.org/data/2.5/forecast?q=${currCity},us&units=imperial&appid=${appid}`;
+    //              api.openweathermap.org/data/2.5/forecast?q=$
+    // get current weather.  Need longitude & lattitude to get UV; separate query for weather icon.
+    $.ajax({
+        url: query5Day,
+        method: "GET"
+    }).then(function (response) {
+        var d = -1;   // index into days array
+        response.list.forEach(function (forecast3Hr, index) {   // for each 3 hour forecast retrieved
+            var thisDate = forecast3Hr.dt_txt;                  // get the date of the forecast for this record
+            thisDate = thisDate.substring(0, thisDate.indexOf(" "));
+            if (moment().format("YYYY-MM-DD") != thisDate) {  // skip if it's a forecast for later "today"
+                if (thisDate != day.dt) {   // if a new date
+                    if (d != -1) {                      // if not the first
+                        var pushDay = {};
+                        pushDay.dt = day.dt;               // push copy of object, not reference to object
+                        pushDay.ic = day.ic;
+                        pushDay.temp = Math.round(day.temp);
+                        pushDay.humid = day.humid;
+                        days.push(pushDay);                 // push the day object onto the days array
+                    };  // end of if not the first day
+                    d++;                            // increment the count of which forecast day you are on
+                    day.dt = thisDate;                  // initialize date for this forecast date
+                    day.ic = `http://openweathermap.org/img/w/${forecast3Hr.weather[0].icon}.png`;  // set the icon
+                    day.temp = Math.round(forecast3Hr.main.temp);   // set the temp
+                    day.humid = forecast3Hr.main.humidity;  // set the humidity
+                }  // of if different date
+                else {                                  // if we've hit a new date
+                    if (forecast3Hr.main.temp > day.temp) {   // replace the temp if the new one is higher
+                        day.temp = forecast3Hr.main.temp;
+                    };
+                    if (forecast3Hr.main.humidity > day.humid) {    // replace the humidity if the new one is higher
+                        day.humid = forecast3Hr.main.humidity;
+                    };
 
-    window.open("./index.html", "_self");  //  refresh page with new current city (which will also be added to list of searched cities)
-});
+                };  // of else (same date)
+            };   // of if forecast for later today (moment = currDate)
+        });  // of forEach 3 hour forecast object from the API
+        var pushDay = {};
+        pushDay.dt = day.dt;               // push copy of object, not reference to object
+        pushDay.ic = day.ic;
+        pushDay.temp = Math.round(day.temp);
+        pushDay.humid = day.humid;
+        days.push(pushDay);                 // push the day object onto the days array
+
+        days.forEach(function (day, i) {
+            $(`#fore5date${i}`).text(days[i].dt);
+            $(`#iconDay${i}`).attr("src", days[i].ic);
+            $(`#fore5temp${i}`).text(`Max temp:  ${days[i].temp} \u00B0F`);
+            $(`#fore5humid${i}`).text(`Max humidity:  ${days[i].humid}%`);
+
+        });  // end of for each day in days array
+    });  // end of then part of query for 5 day forecast
+    return;
+};  // end of putForecast function
+
+// get city to search when submit button clicked
+function getSearchCity() {
+    // Read user's input
+    $("button").click(function (event) {
+        event.preventDefault();
+
+        // save currCity in local storage (add to beginning, so it appears at the top of the list), and re-display page 
+        currCity = $(".inputCity").val();
+        console.log("Input city (currCity):  " + currCity);
+        console.log(event);
+        
+        
+        cityHistory.unshift(currCity);
+        cityHistory = JSON.stringify(cityHistory);
+        localStorage.setItem("weather", cityHistory);
+        
+        window.open("./index.html", "_self");  //  refresh page with new current city (which will also be added to list of searched cities)
+    });
+    return;
+};  // end of getSearchCity function
 
 
+// Initialize the list of cities previously searched, and put them in the page
+initCityHistory();
+
+// Put the current weather on the page
+putCurrWeather();
+
+// Put 5 day forecast on the page (including necesary queries)
+putForecast();
+
+// get city to search when submit button clicked
+getSearchCity();
