@@ -1,12 +1,24 @@
 # Weather dashboard
-https://mauraslavin.github.io/Weather/
+Deployed app: https://mauraslavin.github.io/Weather
+Github page:  https://github.com/MauraSlavin/Weather
+
+## Description
 
 Traveler who wants to check weather before embarking on a trip can use this app to see the current weather of any major city in the world along with the five day forecast for that city.  They will also see a list of cities they have previously searched.
 
+## Technologies and tools used
+
+- jQuery
+- Javascript
+- Bootstrap
+- Openweathermap API
+- local storage
+- popper
+- moment
 
 ## New Users
 
-The first time the app is opened, the screen looks like:
+The first time the app is opened at https://mauraslavin.github.io/Weather, the screen looks like:
 
 [first time user](Assets/BeginScreen.png)
 
