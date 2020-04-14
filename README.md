@@ -20,7 +20,7 @@ Traveler who wants to check weather before embarking on a trip can use this app 
 
 The first time the app is opened at https://mauraslavin.github.io/Weather, the screen looks like:
 
-[first time user](Assets/BeginScreen.png)
+![first time user](/Assets/BeginScreen.png)
 
 The default city that is displayed is Boston.
 
@@ -31,7 +31,7 @@ There is a search box on the top left corner.  When a city is entered (just the 
 
 If a traveler searched Cleveland, San Francisco, and London, (in that order), here is what the page then looks like:
 
-[after a few searches](Assets/LaterScreen.png)
+![after a few searches](/Assets/LaterScreen.png)
 
 
 ## Information Displayed
