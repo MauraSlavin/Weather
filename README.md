@@ -18,11 +18,11 @@ Traveler who wants to check weather before embarking on a trip can use this app 
 
 ## New Users
 
-The first time the app is opened at https://mauraslavin.github.io/Weather, the screen looks like:
+The first time the app is opened at https://mauraslavin.github.io/Weather, the screen looks like:  
+(The default city that is displayed is Boston.)
 
 ![first time user](/Assets/BeginScreen.png)
 
-The default city that is displayed is Boston.
 
 
 ## Returning Users
